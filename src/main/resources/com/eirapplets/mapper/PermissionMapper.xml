@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eirapplets.mapper.PermissionMapper">
+
+    <select id="queryPermissionByUsername" resultSets="java.util.Set" resultType="string">
+        select permission from s_user
+        inner join s_user_role on s_user.id = s_user_role.userid
+        inner join s_role on s_user_role.userid = s_role.id
+        inner JOIN s_role_permission on s_role.id = s_role_permission.roleid
+        INNER JOIN s_permission on s_permission.id = s_role_permission.permissionid
+        where username=#{username}
+    </select>
+
+</mapper>

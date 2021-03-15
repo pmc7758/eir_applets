@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eirapplets.mapper.RoleMapper">
+
+    <select id="queryRoleNamesByUsername" resultSets="java.util.Set" resultType="string">
+        select role
+        from s_user inner join s_user_role
+        on s_user.id = s_user_role.userid
+        inner join s_role
+        on s_user_role.roleid = s_role.id
+        where username=#{username}
+    </select>
+
+</mapper>
