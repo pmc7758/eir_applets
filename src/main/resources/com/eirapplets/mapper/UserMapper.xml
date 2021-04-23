@@ -11,18 +11,43 @@
         <result column="password" property="password"></result>
     </resultMap>
 
-    <select id="login" parameterType="User" resultType="User">
+    <select id="queryUser" parameterType="User" resultType="User">
         select * from s_user where
         username=#{username} and password=#{password}
     </select>
 
-    <insert id="register" parameterType="User" useGeneratedKeys="true" keyProperty="id">
+    <insert id="saveUser" parameterType="User" useGeneratedKeys="true" keyProperty="id">
         insert into s_user values (#{id}, #{name}, #{grade}, #{password}, #{username}, #{phone})
     </insert>
 
     <select id="queryUserByUsername" resultMap="userMap">
         select * from s_user
         where username=#{username}
+    </select>
+
+
+    <insert id="saveUserTemperature" parameterType="Temperature" useGeneratedKeys="true" keyProperty="id">
+        insert into s_temperature values (#{id}, #{datetime}, #{userid}, #{temperature}, #{place})
+    </insert>
+
+    <update id="update" parameterType="User">
+        update s_user set name=#{name},grade=#{grade},password=#{password},username=#{username},phone=#{phone}
+        where id = #{id}
+    </update>
+
+    <select id="queryUserById" parameterType="Integer" resultType="User">
+        select * from s_user where
+        id = #{id}
+    </select>
+
+    <select id="queryPhoneNumbers" parameterType="String" resultType="String">
+        SELECT name,phone
+        from s_user
+        WHERE id NOT IN(
+            SELECT userid
+            FROM s_temperature
+            WHERE DATE(datetime) = #{date}
+            )
     </select>
 
 </mapper>

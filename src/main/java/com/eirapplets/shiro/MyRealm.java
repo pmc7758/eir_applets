@@ -3,7 +3,7 @@ package com.eirapplets.shiro;
 import com.eirapplets.jwt.JwtToken;
 import com.eirapplets.mapper.PermissionMapper;
 import com.eirapplets.mapper.RoleMapper;
-import com.eirapplets.pojo.User;
+import com.eirapplets.pojo.PO.User;
 import com.eirapplets.service.UserService;
 import com.eirapplets.utils.JwtUtil;
 import lombok.extern.slf4j.Slf4j;

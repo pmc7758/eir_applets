@@ -1,0 +1,33 @@
+= 疫情信息上报系统接口文档
+
+
+[[_overview]]
+== Overview
+用来疫情信息上报系统前后端开发人员接口交互的的文档
+
+
+=== Version information
+[%hardbreaks]
+__Version__ : 1.0
+
+
+=== Contact information
+[%hardbreaks]
+__Contact__ : 软件工程12组-庞坚
+__Contact Email__ : 614039502@qq.com
+
+
+=== URI scheme
+[%hardbreaks]
+__Host__ : localhost:8989
+__BasePath__ : /
+
+
+=== Tags
+
+* 框架成功构建测试控制器 : Demo Controller
+* 温度信息控制器 : Temperature Controller
+* 用户控制器 : User Controller
+
+
+

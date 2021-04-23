@@ -11,7 +11,7 @@
  Target Server Version : 80023
  File Encoding         : 65001
 
- Date: 15/03/2021 22:10:14
+ Date: 16/04/2021 14:31:23
 */
 
 SET NAMES utf8mb4;
@@ -85,17 +85,23 @@ INSERT INTO `s_role_permission` VALUES (3, 5);
 -- ----------------------------
 DROP TABLE IF EXISTS `s_temperature`;
 CREATE TABLE `s_temperature`  (
-  `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `id` int(0) NOT NULL AUTO_INCREMENT,
   `datetime` datetime(0) NULL DEFAULT NULL,
   `userid` int(0) NULL DEFAULT NULL,
   `temperature` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `place` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
   INDEX `userid`(`userid`) USING BTREE,
   CONSTRAINT `s_temperature_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `s_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 34 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of s_temperature
 -- ----------------------------
+INSERT INTO `s_temperature` VALUES (1, '2021-04-13 14:05:03', NULL, NULL, NULL);
+INSERT INTO `s_temperature` VALUES (2, '2021-04-13 14:07:44', NULL, '36', '玉林市');
+INSERT INTO `s_temperature` VALUES (3, '2021-04-13 14:27:30', NULL, '38', '桂林市');
+INSERT INTO `s_temperature` VALUES (34, '2021-04-13 14:30:10', 33, '36', '北京市');
 
 -- ----------------------------
 -- Table structure for s_user
@@ -109,7 +115,7 @@ CREATE TABLE `s_user`  (
   `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `phone` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 33 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of s_user
@@ -117,6 +123,7 @@ CREATE TABLE `s_user`  (
 INSERT INTO `s_user` VALUES (30, '卢贤涛', '18003004', '123456782', '1800300421', '17607750053');
 INSERT INTO `s_user` VALUES (31, '庞坚', '18003004', '60ffe97e10dbeb5f03f8dfc4a53ac466', '1800300425', '17607750063');
 INSERT INTO `s_user` VALUES (32, '潘林炎', '1800300425', 'e10adc3949ba59abbe56e057f20f883e', '1800300424', '13687750063');
+INSERT INTO `s_user` VALUES (33, '梁兴', '18003003', 'e10adc3949ba59abbe56e057f20f883e', '1800300323', '17607750036');
 
 -- ----------------------------
 -- Table structure for s_user_role

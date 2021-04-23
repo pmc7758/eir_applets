@@ -1,7 +1,10 @@
 package com.eirapplets.mapper;
 
-import com.eirapplets.pojo.User;
+import com.eirapplets.pojo.PO.Temperature;
+import com.eirapplets.pojo.PO.User;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
  * @author pangjian
@@ -12,10 +15,18 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserMapper {
 
-    User login(User user);
+    User queryUser(User user);
 
-    void register(User user);
+    void saveUser(User user);
 
     User queryUserByUsername(String username);
+
+    void saveUserTemperature(Temperature temperature);
+
+    List<String> queryPhoneNumbers(String date);
+
+    void update(User user);
+
+    User queryUserById(Integer id);
 
 }

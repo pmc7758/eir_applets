@@ -1,6 +1,9 @@
 package com.eirapplets.service;
 
-import com.eirapplets.pojo.User;
+import com.eirapplets.pojo.PO.Temperature;
+import com.eirapplets.pojo.PO.User;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author pangjian
@@ -16,5 +19,9 @@ public interface UserService {
     void register(User user);
 
     User findByUserName(String username);
+
+    void userAddTemperature(Temperature temperature, HttpServletRequest httpServletRequest);
+
+    void updateUser(User user) throws Exception;
 
 }
