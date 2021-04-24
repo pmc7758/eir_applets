@@ -25,7 +25,6 @@ __BasePath__ : /
 
 === Tags
 
-* 框架成功构建测试控制器 : Demo Controller
 * 温度信息控制器 : Temperature Controller
 * 用户控制器 : User Controller
 

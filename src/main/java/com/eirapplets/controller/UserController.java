@@ -8,6 +8,7 @@ import com.eirapplets.utils.VerifyCodeUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.util.Base64Utils;
@@ -28,6 +29,7 @@ import java.util.Map;
  */
 @Api(tags = "用户控制器")
 @RestController
+@Slf4j
 public class UserController {
 
     @Autowired
@@ -79,6 +81,7 @@ public class UserController {
             @ApiParam(name = "二维码",value = "用户注册时填写的二维码",required = true) String code,
             HttpServletRequest httpServletRequest) {
 
+        log.info("进入注册");
         Map<String, Object> map = new HashMap<>();
         String key = (String) httpServletRequest.getServletContext().getAttribute("code");
         try {
@@ -103,10 +106,10 @@ public class UserController {
      * @date 2021/4/22 10:45
     */
     @ApiOperation(value = "二维码图片获取方法",notes = "前端通过此接口可以获取4位二维码图片")
-    @GetMapping("/image")
+    @GetMapping("user/image")
     public String getImage(HttpServletRequest httpServletRequest){
         String code = VerifyCodeUtils.generateVerifyCode(4);
-
+        log.info(code);
         httpServletRequest.getServletContext().setAttribute("code",code);
 
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -159,7 +162,7 @@ public class UserController {
     @Scheduled(cron = "0 0 18 * * ?")
     public void remind(){
 
-        sendSmsService.remind();
+        //sendSmsService.remind();
 
     }
 

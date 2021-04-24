@@ -65,7 +65,7 @@ public class MyRealm extends AuthorizingRealm {
         User user = userService.findByUserName(username);
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         if(user != null){
-            System.out.println("授权过此");
+            log.info("用户授权");
             Set<String> roleName = roleMapper.queryRoleNamesByUsername(username);
             Iterator iterator = roleName.iterator();
             while (iterator.hasNext()){
@@ -95,7 +95,7 @@ public class MyRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken auth) throws AuthenticationException {
         String token = (String) auth.getCredentials();
-        System.out.println(token);
+        log.info(token);
         // 解密获得username，用于和数据库进行对比
         String username = null;
         try {

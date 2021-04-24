@@ -84,7 +84,7 @@ public class SendSmsServiceImpl implements SendSmsService {
      * @date 2021/4/23 12:51
     */
     @Override
-    public void Report() {
+    public void report() {
         sendSms("17607750063");
     }
 }

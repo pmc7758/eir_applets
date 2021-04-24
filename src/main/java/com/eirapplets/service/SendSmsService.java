@@ -13,6 +13,6 @@ public interface SendSmsService {
 
     public void remind();
 
-    public void Report();
+    public void report();
 
 }

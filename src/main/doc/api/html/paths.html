@@ -523,7 +523,6 @@ table.CodeRay td.code>pre{padding:0}
 <ul class="sectlevel1">
 <li><a href="#_paths">Resources</a>
 <ul class="sectlevel2">
-<li><a href="#_58776bfd7f196e6f4e7bb6fa8e094cab">框架成功构建测试控制器</a></li>
 <li><a href="#_ffea6a4380b75cdbf525d6d4b6808855">温度信息控制器</a></li>
 <li><a href="#_68de2a735576550de42f73596beee7ab">用户控制器</a></li>
 </ul>
@@ -536,16 +535,71 @@ table.CodeRay td.code>pre{padding:0}
 <h2 id="_paths">Resources</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_58776bfd7f196e6f4e7bb6fa8e094cab">框架成功构建测试控制器</h3>
+<h3 id="_ffea6a4380b75cdbf525d6d4b6808855">温度信息控制器</h3>
 <div class="paragraph">
-<p>Demo Controller</p>
+<p>Temperature Controller</p>
 </div>
 <div class="sect3">
-<h4 id="_sayhellousingpost">测试方法</h4>
+<h4 id="_addtemperatureusingget">用户上传体温信息方法</h4>
 <div class="literalblock">
 <div class="content">
-<pre>POST /sayHello</pre>
+<pre>GET /user/login/addtemperature</pre>
 </div>
+</div>
+<div class="sect4">
+<h5 id="_description">Description</h5>
+<div class="paragraph">
+<p>处理get类型疫情体温信息请求方法</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_parameters">Parameters</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 11.1111%;">
+<col style="width: 16.6666%;">
+<col style="width: 50%;">
+<col style="width: 22.2223%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">Type</th>
+<th class="tableblock halign-left valign-middle">Name</th>
+<th class="tableblock halign-left valign-middle">Description</th>
+<th class="tableblock halign-left valign-middle">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Query</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>userid</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">绑定用户id，服务器判断</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">integer (int32)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Query</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>上传时间</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">信息的上传时间，由服务器判断</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Query</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>地点</strong><br>
+<em>required</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">疫情上传温度实体类的地点属性</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Query</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>温度</strong><br>
+<em>required</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">疫情上传温度实体类的温度属性</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="sect4">
 <h5 id="_responses">Responses</h5>
@@ -566,7 +620,499 @@ table.CodeRay td.code>pre{padding:0}
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>200</strong></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">OK</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">object</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>401</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Unauthorized</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>403</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Forbidden</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>404</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Not Found</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_produces">Produces</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code><strong>/</strong></code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_getallnoreportbydateusingget">获取指定日期未上报的学生，默认日期是当天</h4>
+<div class="literalblock">
+<div class="content">
+<pre>GET /user/login/getallnoreportbydate</pre>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_parameters_2">Parameters</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 11.1111%;">
+<col style="width: 16.6666%;">
+<col style="width: 50%;">
+<col style="width: 22.2223%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">Type</th>
+<th class="tableblock halign-left valign-middle">Name</th>
+<th class="tableblock halign-left valign-middle">Description</th>
+<th class="tableblock halign-left valign-middle">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Body</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>日期</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">查询需要的日期条件</p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_responses_2">Responses</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 70%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">HTTP Code</th>
+<th class="tableblock halign-left valign-middle">Description</th>
+<th class="tableblock halign-left valign-middle">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>200</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">OK</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">object</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>401</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Unauthorized</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>403</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Forbidden</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>404</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Not Found</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_produces_2">Produces</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code><strong>/</strong></code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_queryalltemperatureusingget">老师根据日期查询所有学生体温信息方法</h4>
+<div class="literalblock">
+<div class="content">
+<pre>GET /user/login/queryalltemperature</pre>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_description_2">Description</h5>
+<div class="paragraph">
+<p>老师根据日期分页查询所有学生体温信息方法</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_parameters_3">Parameters</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 11.1111%;">
+<col style="width: 16.6666%;">
+<col style="width: 50%;">
+<col style="width: 22.2223%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">Type</th>
+<th class="tableblock halign-left valign-middle">Name</th>
+<th class="tableblock halign-left valign-middle">Description</th>
+<th class="tableblock halign-left valign-middle">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Body</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>日期</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">日期作为查询条件，默认为当前日期</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Body</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>行数</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">一页展示的记录条数</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">integer (int32)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Body</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>页码</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">分页的页码</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">integer (int32)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_responses_3">Responses</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 70%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">HTTP Code</th>
+<th class="tableblock halign-left valign-middle">Description</th>
+<th class="tableblock halign-left valign-middle">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>200</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">OK</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">object</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>401</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Unauthorized</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>403</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Forbidden</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>404</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Not Found</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_produces_3">Produces</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code><strong>/</strong></code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_querytemperaturebymeusingget">查询自己的体温信息</h4>
+<div class="literalblock">
+<div class="content">
+<pre>GET /user/login/querytemperaturebyme</pre>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_responses_4">Responses</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 70%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">HTTP Code</th>
+<th class="tableblock halign-left valign-middle">Description</th>
+<th class="tableblock halign-left valign-middle">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>200</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">OK</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">object</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>401</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Unauthorized</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>403</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Forbidden</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>404</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Not Found</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_produces_4">Produces</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code><strong>/</strong></code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_querytemperaturebyusernameusingget">根据学号查询一个学生的全部温度记录</h4>
+<div class="literalblock">
+<div class="content">
+<pre>GET /user/login/querytemperaturebyusername</pre>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_parameters_4">Parameters</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 11.1111%;">
+<col style="width: 16.6666%;">
+<col style="width: 50%;">
+<col style="width: 22.2223%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">Type</th>
+<th class="tableblock halign-left valign-middle">Name</th>
+<th class="tableblock halign-left valign-middle">Description</th>
+<th class="tableblock halign-left valign-middle">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Body</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>学号</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">用户输入的学号</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_responses_5">Responses</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 70%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">HTTP Code</th>
+<th class="tableblock halign-left valign-middle">Description</th>
+<th class="tableblock halign-left valign-middle">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>200</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">OK</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">object</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>401</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Unauthorized</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>403</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Forbidden</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>404</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Not Found</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_produces_5">Produces</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code><strong>/</strong></code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_68de2a735576550de42f73596beee7ab">用户控制器</h3>
+<div class="paragraph">
+<p>User Controller</p>
+</div>
+<div class="sect3">
+<h4 id="_getimageusingget">二维码图片获取方法</h4>
+<div class="literalblock">
+<div class="content">
+<pre>GET /image</pre>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_description_3">Description</h5>
+<div class="paragraph">
+<p>前端通过此接口可以获取4位二维码图片</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_responses_6">Responses</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 70%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">HTTP Code</th>
+<th class="tableblock halign-left valign-middle">Description</th>
+<th class="tableblock halign-left valign-middle">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>200</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">OK</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>401</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Unauthorized</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>403</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Forbidden</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>404</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Not Found</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_produces_6">Produces</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code><strong>/</strong></code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_loginusingpost">登录方法</h4>
+<div class="literalblock">
+<div class="content">
+<pre>POST /user/login</pre>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_description_4">Description</h5>
+<div class="paragraph">
+<p>处理post类型登录请求方法</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_parameters_5">Parameters</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 11.1111%;">
+<col style="width: 16.6666%;">
+<col style="width: 50%;">
+<col style="width: 22.2223%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">Type</th>
+<th class="tableblock halign-left valign-middle">Name</th>
+<th class="tableblock halign-left valign-middle">Description</th>
+<th class="tableblock halign-left valign-middle">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Body</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>登录对象</strong><br>
+<em>required</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">用户登录填写信息后封装成用户类对象</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_c2d667b8a3f2d3260c2fffc9b5454834">用户实体类</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_responses_7">Responses</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 70%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">HTTP Code</th>
+<th class="tableblock halign-left valign-middle">Description</th>
+<th class="tableblock halign-left valign-middle">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>200</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">OK</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">object</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>201</strong></p></td>
@@ -602,7 +1148,7 @@ table.CodeRay td.code>pre{padding:0}
 </div>
 </div>
 <div class="sect4">
-<h5 id="_produces">Produces</h5>
+<h5 id="_produces_7">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -613,71 +1159,42 @@ table.CodeRay td.code>pre{padding:0}
 </div>
 </div>
 <div class="sect3">
-<h4 id="_sayhellousingget">测试方法</h4>
+<h4 id="_updateuserusingpost">用户修改信息</h4>
 <div class="literalblock">
 <div class="content">
-<pre>GET /sayHello</pre>
+<pre>POST /user/login/update</pre>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_responses_2">Responses</h5>
+<h5 id="_parameters_6">Parameters</h5>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
-<col style="width: 10%;">
-<col style="width: 70%;">
-<col style="width: 20%;">
+<col style="width: 11.1111%;">
+<col style="width: 16.6666%;">
+<col style="width: 50%;">
+<col style="width: 22.2223%;">
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-middle">HTTP Code</th>
+<th class="tableblock halign-left valign-middle">Type</th>
+<th class="tableblock halign-left valign-middle">Name</th>
 <th class="tableblock halign-left valign-middle">Description</th>
 <th class="tableblock halign-left valign-middle">Schema</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>200</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">OK</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>401</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">Unauthorized</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>403</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">Forbidden</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>404</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">Not Found</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Body</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>更新信息用户对象</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">更新信息封装成对象，当前用户id不能为null</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_c2d667b8a3f2d3260c2fffc9b5454834">用户实体类</a></p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_2">Produces</h5>
-<div class="ulist">
-<ul>
-<li>
-<p><code><strong>/</strong></code></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_sayhellousingput">测试方法</h4>
-<div class="literalblock">
-<div class="content">
-<pre>PUT /sayHello</pre>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_responses_3">Responses</h5>
+<h5 id="_responses_8">Responses</h5>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 10%;">
@@ -695,7 +1212,7 @@ table.CodeRay td.code>pre{padding:0}
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>200</strong></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">OK</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">object</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>201</strong></p></td>
@@ -731,537 +1248,7 @@ table.CodeRay td.code>pre{padding:0}
 </div>
 </div>
 <div class="sect4">
-<h5 id="_produces_3">Produces</h5>
-<div class="ulist">
-<ul>
-<li>
-<p><code><strong>/</strong></code></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_sayhellousingdelete">测试方法</h4>
-<div class="literalblock">
-<div class="content">
-<pre>DELETE /sayHello</pre>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_responses_4">Responses</h5>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 10%;">
-<col style="width: 70%;">
-<col style="width: 20%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-middle">HTTP Code</th>
-<th class="tableblock halign-left valign-middle">Description</th>
-<th class="tableblock halign-left valign-middle">Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>200</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">OK</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>204</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>401</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">Unauthorized</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>403</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">Forbidden</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect4">
-<h5 id="_produces_4">Produces</h5>
-<div class="ulist">
-<ul>
-<li>
-<p><code><strong>/</strong></code></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_sayhellousingpatch">测试方法</h4>
-<div class="literalblock">
-<div class="content">
-<pre>PATCH /sayHello</pre>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_responses_5">Responses</h5>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 10%;">
-<col style="width: 70%;">
-<col style="width: 20%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-middle">HTTP Code</th>
-<th class="tableblock halign-left valign-middle">Description</th>
-<th class="tableblock halign-left valign-middle">Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>200</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">OK</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>204</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>401</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">Unauthorized</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>403</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">Forbidden</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect4">
-<h5 id="_consumes_3">Consumes</h5>
-<div class="ulist">
-<ul>
-<li>
-<p><code>application/json</code></p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_produces_5">Produces</h5>
-<div class="ulist">
-<ul>
-<li>
-<p><code><strong>/</strong></code></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_sayhellousinghead">测试方法</h4>
-<div class="literalblock">
-<div class="content">
-<pre>HEAD /sayHello</pre>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_responses_6">Responses</h5>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 10%;">
-<col style="width: 70%;">
-<col style="width: 20%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-middle">HTTP Code</th>
-<th class="tableblock halign-left valign-middle">Description</th>
-<th class="tableblock halign-left valign-middle">Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>200</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">OK</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>204</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>401</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">Unauthorized</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>403</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">Forbidden</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect4">
-<h5 id="_consumes_4">Consumes</h5>
-<div class="ulist">
-<ul>
-<li>
-<p><code>application/json</code></p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_produces_6">Produces</h5>
-<div class="ulist">
-<ul>
-<li>
-<p><code><strong>/</strong></code></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_sayhellousingoptions">测试方法</h4>
-<div class="literalblock">
-<div class="content">
-<pre>OPTIONS /sayHello</pre>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_responses_7">Responses</h5>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 10%;">
-<col style="width: 70%;">
-<col style="width: 20%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-middle">HTTP Code</th>
-<th class="tableblock halign-left valign-middle">Description</th>
-<th class="tableblock halign-left valign-middle">Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>200</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">OK</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>204</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>401</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">Unauthorized</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>403</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">Forbidden</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect4">
-<h5 id="_consumes_5">Consumes</h5>
-<div class="ulist">
-<ul>
-<li>
-<p><code>application/json</code></p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_produces_7">Produces</h5>
-<div class="ulist">
-<ul>
-<li>
-<p><code><strong>/</strong></code></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_ffea6a4380b75cdbf525d6d4b6808855">温度信息控制器</h3>
-<div class="paragraph">
-<p>Temperature Controller</p>
-</div>
-<div class="sect3">
-<h4 id="_addusingget">用户上传体温信息方法</h4>
-<div class="literalblock">
-<div class="content">
-<pre>GET /user/login/addtemperature</pre>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_description">Description</h5>
-<div class="paragraph">
-<p>处理get类型疫情体温信息请求方法</p>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_parameters">Parameters</h5>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 11.1111%;">
-<col style="width: 16.6666%;">
-<col style="width: 50%;">
-<col style="width: 22.2223%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-middle">Type</th>
-<th class="tableblock halign-left valign-middle">Name</th>
-<th class="tableblock halign-left valign-middle">Description</th>
-<th class="tableblock halign-left valign-middle">Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Body</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>体温信息对象</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">体温信息对象</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_135593011dd0842e6d29d30827f1ea6e">温度实体类</a></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect4">
-<h5 id="_responses_8">Responses</h5>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 10%;">
-<col style="width: 70%;">
-<col style="width: 20%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-middle">HTTP Code</th>
-<th class="tableblock halign-left valign-middle">Description</th>
-<th class="tableblock halign-left valign-middle">Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>200</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">OK</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">object</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>401</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">Unauthorized</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>403</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">Forbidden</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>404</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">Not Found</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect4">
 <h5 id="_produces_8">Produces</h5>
-<div class="ulist">
-<ul>
-<li>
-<p><code><strong>/</strong></code></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_68de2a735576550de42f73596beee7ab">用户控制器</h3>
-<div class="paragraph">
-<p>User Controller</p>
-</div>
-<div class="sect3">
-<h4 id="_getimageusingget">二维码图片获取方法</h4>
-<div class="literalblock">
-<div class="content">
-<pre>GET /image</pre>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_description_2">Description</h5>
-<div class="paragraph">
-<p>前端通过此接口可以获取4位二维码图片</p>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_responses_9">Responses</h5>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 10%;">
-<col style="width: 70%;">
-<col style="width: 20%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-middle">HTTP Code</th>
-<th class="tableblock halign-left valign-middle">Description</th>
-<th class="tableblock halign-left valign-middle">Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>200</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">OK</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>401</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">Unauthorized</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>403</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">Forbidden</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>404</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">Not Found</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect4">
-<h5 id="_produces_9">Produces</h5>
-<div class="ulist">
-<ul>
-<li>
-<p><code><strong>/</strong></code></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_loginusingpost">登录方法</h4>
-<div class="literalblock">
-<div class="content">
-<pre>POST /user/login</pre>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_description_3">Description</h5>
-<div class="paragraph">
-<p>处理post类型登录请求方法</p>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_parameters_2">Parameters</h5>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 11.1111%;">
-<col style="width: 16.6666%;">
-<col style="width: 50%;">
-<col style="width: 22.2223%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-middle">Type</th>
-<th class="tableblock halign-left valign-middle">Name</th>
-<th class="tableblock halign-left valign-middle">Description</th>
-<th class="tableblock halign-left valign-middle">Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Body</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>登录对象</strong><br>
-<em>required</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">用户登录填写信息后封装成用户类对象</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_c2d667b8a3f2d3260c2fffc9b5454834">用户实体类</a></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect4">
-<h5 id="_responses_10">Responses</h5>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 10%;">
-<col style="width: 70%;">
-<col style="width: 20%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-middle">HTTP Code</th>
-<th class="tableblock halign-left valign-middle">Description</th>
-<th class="tableblock halign-left valign-middle">Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>200</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">OK</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">object</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>201</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">Created</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>401</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">Unauthorized</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>403</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">Forbidden</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>404</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">Not Found</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect4">
-<h5 id="_consumes_6">Consumes</h5>
-<div class="ulist">
-<ul>
-<li>
-<p><code>application/json</code></p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_produces_10">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -1279,13 +1266,13 @@ table.CodeRay td.code>pre{padding:0}
 </div>
 </div>
 <div class="sect4">
-<h5 id="_description_4">Description</h5>
+<h5 id="_description_5">Description</h5>
 <div class="paragraph">
 <p>处理post类型注册请求方法</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_parameters_3">Parameters</h5>
+<h5 id="_parameters_7">Parameters</h5>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 11.1111%;">
@@ -1320,7 +1307,7 @@ table.CodeRay td.code>pre{padding:0}
 </table>
 </div>
 <div class="sect4">
-<h5 id="_responses_11">Responses</h5>
+<h5 id="_responses_9">Responses</h5>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 10%;">
@@ -1364,7 +1351,7 @@ table.CodeRay td.code>pre{padding:0}
 </table>
 </div>
 <div class="sect4">
-<h5 id="_consumes_7">Consumes</h5>
+<h5 id="_consumes_3">Consumes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -1374,7 +1361,7 @@ table.CodeRay td.code>pre{padding:0}
 </div>
 </div>
 <div class="sect4">
-<h5 id="_produces_11">Produces</h5>
+<h5 id="_produces_9">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -1390,7 +1377,7 @@ table.CodeRay td.code>pre{padding:0}
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-04-15 17:14:32 CST
+Last updated 2021-04-23 19:16:33 CST
 </div>
 </div>
 </body>

@@ -11,7 +11,6 @@ import io.swagger.annotations.ApiParam;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -44,7 +43,7 @@ public class TemperatureController {
     @ApiOperation(value = "用户上传体温信息方法", notes = "处理get类型疫情体温信息请求方法")
     @GetMapping("user/login/addtemperature")
     public Map<String, Object> addTemperature(
-            @ApiParam(value = "体温信息对象", name = "体温信息对象") @RequestBody Temperature temperature,
+            @ApiParam(value = "体温信息对象", name = "体温信息对象") Temperature temperature,
             HttpServletRequest httpServletRequest) {
 
         Map<String, Object> map = new HashMap<>();
@@ -71,6 +70,7 @@ public class TemperatureController {
      */
     @ApiOperation(value = "老师根据日期查询所有学生体温信息方法", notes = "老师根据日期分页查询所有学生体温信息方法")
     @GetMapping("user/login/queryalltemperature")
+    @RequiresRoles("老师")
     public Map<String, Object> queryAllTemperature(
             @ApiParam(name = "页码", value = "分页的页码", required = false) Integer page,
             @ApiParam(name = "行数", value = "一页展示的记录条数", required = false) Integer row,
@@ -107,6 +107,7 @@ public class TemperatureController {
      */
     @ApiOperation(value = "根据学号查询一个学生的全部温度记录")
     @GetMapping("user/login/querytemperaturebyusername")
+    @RequiresRoles("老师")
     public Map<String, Object> queryTemperatureByUsername(
             @ApiParam(name = "学号", value = "用户输入的学号") String username) {
 
@@ -164,6 +165,7 @@ public class TemperatureController {
     */
     @ApiOperation(value = "获取指定日期未上报的学生，默认日期是当天")
     @GetMapping("user/login/getallnoreportbydate")
+    @RequiresRoles("老师")
     public Map<String,Object> getAllNoReportByDate(
             @ApiParam(name = "日期",value = "查询需要的日期条件") String date){
         Map<String,Object> map = new HashMap<>();

@@ -43,9 +43,6 @@ public class ShiroConfig {
         // authc 配置需要授权的链接
         filterChainDefinitionMap.put("/user/login", "anon");
         filterChainDefinitionMap.put("/user/register", "anon");
-        // filterChainDefinitionMap.put("/user/login/add","Root");
-        // filterChainDefinitionMap.put("/user/update","authc");
-
 
 
         Map<String, Filter> filterMap = new HashMap<String, Filter>(1);

@@ -2,212 +2,12 @@
 [[_paths]]
 == Resources
 
-[[_58776bfd7f196e6f4e7bb6fa8e094cab]]
-=== 框架成功构建测试控制器
-Demo Controller
-
-
-[[_sayhellousingpost]]
-==== 测试方法
-....
-POST /sayHello
-....
-
-
-===== Responses
-
-[options="header", cols=".^2,.^14,.^4"]
-|===
-|HTTP Code|Description|Schema
-|**200**|OK|string
-|**201**|Created|No Content
-|**401**|Unauthorized|No Content
-|**403**|Forbidden|No Content
-|**404**|Not Found|No Content
-|===
-
-
-===== Consumes
-
-* `application/json`
-
-
-===== Produces
-
-* `*/*`
-
-
-[[_sayhellousingget]]
-==== 测试方法
-....
-GET /sayHello
-....
-
-
-===== Responses
-
-[options="header", cols=".^2,.^14,.^4"]
-|===
-|HTTP Code|Description|Schema
-|**200**|OK|string
-|**401**|Unauthorized|No Content
-|**403**|Forbidden|No Content
-|**404**|Not Found|No Content
-|===
-
-
-===== Produces
-
-* `*/*`
-
-
-[[_sayhellousingput]]
-==== 测试方法
-....
-PUT /sayHello
-....
-
-
-===== Responses
-
-[options="header", cols=".^2,.^14,.^4"]
-|===
-|HTTP Code|Description|Schema
-|**200**|OK|string
-|**201**|Created|No Content
-|**401**|Unauthorized|No Content
-|**403**|Forbidden|No Content
-|**404**|Not Found|No Content
-|===
-
-
-===== Consumes
-
-* `application/json`
-
-
-===== Produces
-
-* `*/*`
-
-
-[[_sayhellousingdelete]]
-==== 测试方法
-....
-DELETE /sayHello
-....
-
-
-===== Responses
-
-[options="header", cols=".^2,.^14,.^4"]
-|===
-|HTTP Code|Description|Schema
-|**200**|OK|string
-|**204**|No Content|No Content
-|**401**|Unauthorized|No Content
-|**403**|Forbidden|No Content
-|===
-
-
-===== Produces
-
-* `*/*`
-
-
-[[_sayhellousingpatch]]
-==== 测试方法
-....
-PATCH /sayHello
-....
-
-
-===== Responses
-
-[options="header", cols=".^2,.^14,.^4"]
-|===
-|HTTP Code|Description|Schema
-|**200**|OK|string
-|**204**|No Content|No Content
-|**401**|Unauthorized|No Content
-|**403**|Forbidden|No Content
-|===
-
-
-===== Consumes
-
-* `application/json`
-
-
-===== Produces
-
-* `*/*`
-
-
-[[_sayhellousinghead]]
-==== 测试方法
-....
-HEAD /sayHello
-....
-
-
-===== Responses
-
-[options="header", cols=".^2,.^14,.^4"]
-|===
-|HTTP Code|Description|Schema
-|**200**|OK|string
-|**204**|No Content|No Content
-|**401**|Unauthorized|No Content
-|**403**|Forbidden|No Content
-|===
-
-
-===== Consumes
-
-* `application/json`
-
-
-===== Produces
-
-* `*/*`
-
-
-[[_sayhellousingoptions]]
-==== 测试方法
-....
-OPTIONS /sayHello
-....
-
-
-===== Responses
-
-[options="header", cols=".^2,.^14,.^4"]
-|===
-|HTTP Code|Description|Schema
-|**200**|OK|string
-|**204**|No Content|No Content
-|**401**|Unauthorized|No Content
-|**403**|Forbidden|No Content
-|===
-
-
-===== Consumes
-
-* `application/json`
-
-
-===== Produces
-
-* `*/*`
-
-
 [[_ffea6a4380b75cdbf525d6d4b6808855]]
 === 温度信息控制器
 Temperature Controller
 
 
-[[_addusingget]]
+[[_addtemperatureusingget]]
 ==== 用户上传体温信息方法
 ....
 GET /user/login/addtemperature
@@ -223,8 +23,148 @@ GET /user/login/addtemperature
 [options="header", cols=".^2,.^3,.^9,.^4"]
 |===
 |Type|Name|Description|Schema
-|**Body**|**体温信息对象** +
-__optional__|体温信息对象|<<_135593011dd0842e6d29d30827f1ea6e,温度实体类>>
+|**Query**|**userid** +
+__optional__|绑定用户id，服务器判断|integer (int32)
+|**Query**|**上传时间** +
+__optional__|信息的上传时间，由服务器判断|string
+|**Query**|**地点** +
+__required__|疫情上传温度实体类的地点属性|string
+|**Query**|**温度** +
+__required__|疫情上传温度实体类的温度属性|string
+|===
+
+
+===== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|object
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+===== Produces
+
+* `*/*`
+
+
+[[_getallnoreportbydateusingget]]
+==== 获取指定日期未上报的学生，默认日期是当天
+....
+GET /user/login/getallnoreportbydate
+....
+
+
+===== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**日期** +
+__optional__|查询需要的日期条件|string
+|===
+
+
+===== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|object
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+===== Produces
+
+* `*/*`
+
+
+[[_queryalltemperatureusingget]]
+==== 老师根据日期查询所有学生体温信息方法
+....
+GET /user/login/queryalltemperature
+....
+
+
+===== Description
+老师根据日期分页查询所有学生体温信息方法
+
+
+===== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**日期** +
+__optional__|日期作为查询条件，默认为当前日期|string
+|**Body**|**行数** +
+__optional__|一页展示的记录条数|integer (int32)
+|**Body**|**页码** +
+__optional__|分页的页码|integer (int32)
+|===
+
+
+===== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|object
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+===== Produces
+
+* `*/*`
+
+
+[[_querytemperaturebymeusingget]]
+==== 查询自己的体温信息
+....
+GET /user/login/querytemperaturebyme
+....
+
+
+===== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|object
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+===== Produces
+
+* `*/*`
+
+
+[[_querytemperaturebyusernameusingget]]
+==== 根据学号查询一个学生的全部温度记录
+....
+GET /user/login/querytemperaturebyusername
+....
+
+
+===== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**学号** +
+__optional__|用户输入的学号|string
 |===
 
 
@@ -296,6 +236,46 @@ POST /user/login
 |Type|Name|Description|Schema
 |**Body**|**登录对象** +
 __required__|用户登录填写信息后封装成用户类对象|<<_c2d667b8a3f2d3260c2fffc9b5454834,用户实体类>>
+|===
+
+
+===== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|object
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+===== Consumes
+
+* `application/json`
+
+
+===== Produces
+
+* `*/*`
+
+
+[[_updateuserusingpost]]
+==== 用户修改信息
+....
+POST /user/login/update
+....
+
+
+===== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**更新信息用户对象** +
+__optional__|更新信息封装成对象，当前用户id不能为null|<<_c2d667b8a3f2d3260c2fffc9b5454834,用户实体类>>
 |===
 
 

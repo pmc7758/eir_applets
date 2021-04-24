@@ -2,27 +2,6 @@
 [[_definitions]]
 == Definitions
 
-[[_135593011dd0842e6d29d30827f1ea6e]]
-=== 温度实体类
-
-[options="header", cols=".^3,.^11,.^4"]
-|===
-|Name|Description|Schema
-|**datetime** +
-__optional__|信息的上传时间，由服务器判断 +
-**Example** : `"1999/12/21"`|string
-|**place** +
-__required__|疫情上传温度实体类的地点属性 +
-**Example** : `"桂林市灵田镇花江校区"`|string
-|**temperature** +
-__required__|疫情上传温度实体类的温度属性 +
-**Example** : `"36"`|string
-|**userid** +
-__optional__|绑定用户id，服务器判断 +
-**Example** : `1`|integer (int32)
-|===
-
-
 [[_c2d667b8a3f2d3260c2fffc9b5454834]]
 === 用户实体类
 登录注册传输对象类

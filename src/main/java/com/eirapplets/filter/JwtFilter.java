@@ -38,7 +38,7 @@ public class JwtFilter extends BasicHttpAuthenticationFilter implements Filter {
             //下面的方法会直接到自定义realm中，执行认证和授权
             getSubject(request, response).login(jwtToken);
             // 如果没有抛出异常则代表登入成功，返回true
-            System.out.println("登入成功过executeLogin");
+            log.info("登入成功过executeLogin");
             return true;
         } catch (AuthenticationException e) {
             e.printStackTrace();
